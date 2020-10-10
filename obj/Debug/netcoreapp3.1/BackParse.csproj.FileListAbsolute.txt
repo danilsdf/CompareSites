@@ -1,0 +1,15 @@
+C:\Users\Олег\source\repos\BackParse\bin\Debug\netcoreapp3.1\BackParse.exe
+C:\Users\Олег\source\repos\BackParse\obj\Debug\netcoreapp3.1\BackParse.csprojAssemblyReference.cache
+C:\Users\Олег\source\repos\BackParse\obj\Debug\netcoreapp3.1\BackParse.AssemblyInfoInputs.cache
+C:\Users\Олег\source\repos\BackParse\obj\Debug\netcoreapp3.1\BackParse.AssemblyInfo.cs
+C:\Users\Олег\source\repos\BackParse\bin\Debug\netcoreapp3.1\BackParse.deps.json
+C:\Users\Олег\source\repos\BackParse\bin\Debug\netcoreapp3.1\BackParse.runtimeconfig.json
+C:\Users\Олег\source\repos\BackParse\bin\Debug\netcoreapp3.1\BackParse.runtimeconfig.dev.json
+C:\Users\Олег\source\repos\BackParse\bin\Debug\netcoreapp3.1\BackParse.dll
+C:\Users\Олег\source\repos\BackParse\bin\Debug\netcoreapp3.1\BackParse.pdb
+C:\Users\Олег\source\repos\BackParse\bin\Debug\netcoreapp3.1\AngleSharp.dll
+C:\Users\Олег\source\repos\BackParse\obj\Debug\netcoreapp3.1\BackParse.csproj.CoreCompileInputs.cache
+C:\Users\Олег\source\repos\BackParse\obj\Debug\netcoreapp3.1\BackParse.csproj.CopyComplete
+C:\Users\Олег\source\repos\BackParse\obj\Debug\netcoreapp3.1\BackParse.dll
+C:\Users\Олег\source\repos\BackParse\obj\Debug\netcoreapp3.1\BackParse.pdb
+C:\Users\Олег\source\repos\BackParse\obj\Debug\netcoreapp3.1\BackParse.genruntimeconfig.cache
