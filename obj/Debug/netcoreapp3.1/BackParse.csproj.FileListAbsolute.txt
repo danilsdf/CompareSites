@@ -23,8 +23,10 @@ C:\Users\Олег\source\repos\BackParse\CompareSites\bin\Debug\netcoreapp3.1\An
 C:\Users\Олег\source\repos\BackParse\CompareSites\obj\Debug\netcoreapp3.1\BackParse.csprojAssemblyReference.cache
 C:\Users\Олег\source\repos\BackParse\CompareSites\obj\Debug\netcoreapp3.1\BackParse.AssemblyInfoInputs.cache
 C:\Users\Олег\source\repos\BackParse\CompareSites\obj\Debug\netcoreapp3.1\BackParse.AssemblyInfo.cs
-C:\Users\Олег\source\repos\BackParse\CompareSites\obj\Debug\netcoreapp3.1\BackParse.csproj.CoreCompileInputs.cache
 C:\Users\Олег\source\repos\BackParse\CompareSites\obj\Debug\netcoreapp3.1\BackParse.csproj.CopyComplete
 C:\Users\Олег\source\repos\BackParse\CompareSites\obj\Debug\netcoreapp3.1\BackParse.dll
 C:\Users\Олег\source\repos\BackParse\CompareSites\obj\Debug\netcoreapp3.1\BackParse.pdb
 C:\Users\Олег\source\repos\BackParse\CompareSites\obj\Debug\netcoreapp3.1\BackParse.genruntimeconfig.cache
+C:\Users\Олег\source\repos\BackParse\CompareSites\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\Олег\source\repos\BackParse\CompareSites\bin\Debug\netcoreapp3.1\Telegram.Bot.dll
+C:\Users\Олег\source\repos\BackParse\CompareSites\obj\Debug\netcoreapp3.1\BackParse.csproj.CoreCompileInputs.cache

@@ -2,7 +2,9 @@
 using BackParse.Core.DropGame;
 using BackParse.Core.Google;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using Telegram.Bot;
 
 namespace BackParse.Core
 {
@@ -18,7 +20,6 @@ namespace BackParse.Core
         GHtmlLoader Gloader;
         DHtmlLoader Dloader;
 
-        bool isActive;
         #endregion
 
         #region Properties
@@ -68,34 +69,20 @@ namespace BackParse.Core
                 Dloader = new DHtmlLoader(value);
             }
         }
-        public bool IsActive => isActive;
         #endregion
 
-        public event Action<object, Tuple<string, string>> OnNewData;
-        public event Action<object> OnCompleted;
         public ParserWorker(GoogleParser gparser, DropGameParser dparser)
         {
             this.gparser = gparser;
             this.dparser = dparser;
         }
-        public void Start()
+        public async void Start(TelegramBotClient client, long chatId)
         {
-            isActive = true;
-            Worker();
+             await Worker(client,chatId);
         }
-        public void Abort()
+        private async Task Worker(TelegramBotClient client, long chatId)
         {
-            isActive = false;
-        }
-        private async void Worker()
-        {
-            if (!isActive)
-            {
-                OnCompleted?.Invoke(this);
-                return;
-            }
             bool forloop = true;
-
             for (int i = 1; forloop; i++)
             {
                 var source = await Dloader.GetSourceById(i);
@@ -119,26 +106,30 @@ namespace BackParse.Core
                     }
                     catch (NullReferenceException)
                     {
-                        Data_Version = new Tuple<string, string>(version.Item1, "Did not find");
-                        Console.WriteLine(new string('-', 30));
+                        Data_Version = new Tuple<string, string>(version.Item1, "Did not find"); 
                     }
+                    string str = string.Empty;
                     if (Data_Version.Item2 == "Varieswithdevice" || Data_Version.Item2 == "Did not find") {
-                        Console.WriteLine(version.Item1 + " must be checked one more time");
-                    Console.WriteLine(new string('-',30));
+                        str = version.Item1 + $" must be checked one more time\n{url}";
+                        await Send_NewData(client, chatId, str);
                     }
-                    else if (version.Item2 == Data_Version.Item2) { 
-                        //Console.WriteLine(version.Item1 + " is current version");
+                    else if (version.Item2 == Data_Version.Item2) {
                     }
-                    else
-                    {
-                        OnNewData?.Invoke(this, new Tuple<string, string>(version.Item1,$"{version.Item2} -- {Data_Version.Item2}"));
-                    Console.WriteLine(new string('-',30));
+                    else { 
+                        str = $"{version.Item1} {version.Item2} -- {Data_Version.Item2}\n{url}";
+                        await Send_NewData(client, chatId, str);
                     }
                 }
             }
-            
-            OnCompleted?.Invoke(this);
-            isActive = false;
+            await Parser_OnCompleted(client, chatId);
+        }
+        private async Task Parser_OnCompleted(TelegramBotClient client, long chatId)
+        {
+            await client.SendTextMessageAsync(chatId, "It is all for now!)\nHave a nice time working on site!*");
+        }
+        private async Task Send_NewData(TelegramBotClient client, long chatId, string s)
+        {
+            await client.SendTextMessageAsync(chatId, s);
         }
         private async Task<string> GetUrlApp(string name)
         {

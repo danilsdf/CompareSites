@@ -1,56 +1,57 @@
-﻿using BackParse.Core;
-using BackParse.Core.DropGame;
-using BackParse.Core.Google;
+﻿using BackParse.TelegramBot;
+using BackParse.TelegramBot.Commands;
 using System;
+using System.Collections.Generic;
+using System.IO;
+using Telegram.Bot;
+using Telegram.Bot.Args;
+using Telegram.Bot.Types.Enums;
 
 namespace BackParse
 {
     class Program
     {
-        static ParserWorker parser;
-
+        private static TelegramBotClient BotClient;
+        public static IReadOnlyList<Command> commands;
+        static bool IsWorking = false;
         static void Main()
         {
-            parser = new ParserWorker(new GoogleParser(), new DropGameParser());
-            parser.OnCompleted += Parser_OnCompleted;
-            parser.OnNewData += Parser_OnNewData;
 
-            Console.WriteLine("Write a number of type:\n1.Games\n2.Programs ");
-            ConsoleKey key;
-            string type = string.Empty;
-            while (type == string.Empty)
+            BotClient = Bot.Get();
+            commands = Bot.Commands;
+
+            BotClient.OnMessage += BotClient_OnMessage;
+            BotClient.OnMessageEdited += BotClient_OnMessage;
+
+            BotClient.StartReceiving();
+            Console.ReadKey();
+        }
+        private async static void BotClient_OnMessage(object sender, MessageEventArgs e)
+        {
+            Console.WriteLine(e.Message.Chat.Id);
+            if (e.Message.Text == null || e.Message.Type != MessageType.Text) return;
+            //return;
+            if (e.Message.Chat.Id != 381714929 && e.Message.Chat.Id != 386219611)
             {
-                key = Console.ReadKey().Key;
-                switch (key)
+                await BotClient.SendTextMessageAsync(e.Message.Chat.Id, $"Stop writing to this bot\n" +
+                    $"This bot was created for comfortable work with a site");return;
+            }
+            //if (IsWorking)
+            //{
+            //    await BotClient.SendTextMessageAsync(e.Message.Chat.Id, $"I am working!\n Please, stop spaming"); return;
+            //}
+            var message = e.Message;
+
+            foreach (var command in commands)
+            {
+                if (command.Contains(message.Text))
                 {
-                    case ConsoleKey.D1:
-                        type = "games";
-                        break;
-                    case ConsoleKey.D2:
-                        type = "program";
-                        break;
-                    default:
-                        Console.Write("Write one more time! ");
-                        break;
+                    //IsWorking = true;
+                    command.Execute(message, BotClient);
+                    //IsWorking = false;
+                    break;
                 }
             }
-            Console.WriteLine();
-            parser.GParserSetting = new GoogleSettings();
-            parser.DParserSetting = new DropGameSettings(type);
-            parser.Start();
-        }
-
-        private static void Parser_OnNewData(object arg1, Tuple<string, string> arg2)
-        {
-            //foreach (var item in arg2)
-            //{
-                Console.WriteLine($"{arg2.Item1} {arg2.Item2}");
-            //}
-        }
-
-        private static void Parser_OnCompleted(object obj)
-        {
-            Console.WriteLine("All works done");
         }
     }
 }
