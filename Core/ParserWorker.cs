@@ -94,9 +94,12 @@ namespace BackParse.Core
                 OnCompleted?.Invoke(this);
                 return;
             }
-            for (int i = 1; i <= dparserSetting.MaxPage; i++)
+            bool forloop = true;
+
+            for (int i = 1; forloop; i++)
             {
                 var source = await Dloader.GetSourceById(i);
+                if (source == default) forloop = false;
                 var domParser = new HtmlParser();
 
                 var document = await domParser.ParseDocumentAsync(source);
@@ -106,23 +109,31 @@ namespace BackParse.Core
                 {
                     source = await Gloader.GetSourceBylink(url);
                     document = await domParser.ParseDocumentAsync(source);
-                    //var version = dparser.GetVersion(document);
-                    var result = dparser.GetVersion(document);
-                    
-                    OnNewData?.Invoke(this, result);
-                    Tuple<string, string> Data_Version = new Tuple<string, string>(result.Item1, "Did not find");
+                    var version = dparser.GetVersion(document);
+
+                    Tuple<string, string> Data_Version;
                     try
                     {
-                        string appUrl = await GetUrlApp(result.Item1);
+                        string appUrl = await GetUrlApp(version.Item1);
                         Data_Version = await GetDate_Version(appUrl);
                     }
                     catch (NullReferenceException)
                     {
-                       
+                        Data_Version = new Tuple<string, string>(version.Item1, "Did not find");
+                        Console.WriteLine(new string('-', 30));
                     }
-
-                    OnNewData?.Invoke(this, Data_Version);
+                    if (Data_Version.Item2 == "Varieswithdevice" || Data_Version.Item2 == "Did not find") {
+                        Console.WriteLine(version.Item1 + " must be checked one more time");
                     Console.WriteLine(new string('-',30));
+                    }
+                    else if (version.Item2 == Data_Version.Item2) { 
+                        //Console.WriteLine(version.Item1 + " is current version");
+                    }
+                    else
+                    {
+                        OnNewData?.Invoke(this, new Tuple<string, string>(version.Item1,$"{version.Item2} -- {Data_Version.Item2}"));
+                    Console.WriteLine(new string('-',30));
+                    }
                 }
             }
             

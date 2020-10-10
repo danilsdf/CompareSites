@@ -17,13 +17,18 @@ namespace BackParse.Core.Google
 
         public Tuple<string,string> GetDataVersion(IHtmlDocument document)
         {
-            var tags = document.QuerySelectorAll("span").Where(tag => tag.ClassName != null && tag.ClassName.Contains("htlgb")).Select(s => s.TextContent).Distinct().ToArray();
-            
-            string date = tags[0],version;
-            if (tags.Contains("Varies with device"))
-                version = tags[1];
-            else
-                version = tags[3];
+            var tags = document.QuerySelectorAll("div").Where(tag => tag.ClassName != null && tag.ClassName.Contains("hAyfc")).Select(s => s.TextContent).Distinct().ToArray();
+
+            string date = string.Empty, 
+                version = string.Empty;
+
+            foreach (var tag in tags)
+            {
+                if (tag.Contains("Updated"))
+                    date = tag.Substring(7);
+                else if(tag.Contains("Current Version"))
+                    version = tag.Substring(15).Replace(" ", "");
+            }
             return new Tuple<string, string>(date, version);
         }
     }

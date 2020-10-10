@@ -9,22 +9,35 @@ namespace BackParse
     {
         static ParserWorker parser;
 
-        static void Main(string[] args)
+        static void Main()
         {
-            parser = new ParserWorker(new GoogleParser(), new DropGameParser() );
+            parser = new ParserWorker(new GoogleParser(), new DropGameParser());
             parser.OnCompleted += Parser_OnCompleted;
             parser.OnNewData += Parser_OnNewData;
 
-            while (true)
+            Console.WriteLine("Write a number of type:\n1.Games\n2.Programs ");
+            ConsoleKey key;
+            string type = string.Empty;
+            while (type == string.Empty)
             {
-                //Console.Write("Write an app name: ");
-               // string appname = Console.ReadLine();
-                parser.GParserSetting = new GoogleSettings("Mario Kart Tour");
-                parser.DParserSetting = new DropGameSettings("games",4);
-                parser.Start();
-
-                Console.ReadKey();
+                key = Console.ReadKey().Key;
+                switch (key)
+                {
+                    case ConsoleKey.D1:
+                        type = "games";
+                        break;
+                    case ConsoleKey.D2:
+                        type = "program";
+                        break;
+                    default:
+                        Console.Write("Write one more time! ");
+                        break;
+                }
             }
+            Console.WriteLine();
+            parser.GParserSetting = new GoogleSettings();
+            parser.DParserSetting = new DropGameSettings(type);
+            parser.Start();
         }
 
         private static void Parser_OnNewData(object arg1, Tuple<string, string> arg2)

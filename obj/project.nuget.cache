@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "y7Lh9eP9b7coLccCBteDJVoTLxzh8B3fyiwdIVgCr0EQlB3t1kAO3xWaCkAm/BPSnQGmrlrMPSGavgemOGU5DQ==",
+  "dgSpecHash": "DVIbkKIB8pFu1EiCDAQ9wK8k5aFLN19bdfivaBSMIpUU+a6c9FBe8AE9Tc+rdoSi+y2uQ4nuhkePEFtjfr+62g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Олег\\source\\repos\\BackParse\\BackParse.csproj",
+  "projectFilePath": "C:\\Users\\Олег\\source\\repos\\BackParse\\CompareSites\\BackParse.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Олег\\.nuget\\packages\\anglesharp\\0.14.0\\anglesharp.0.14.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\2.0.0\\microsoft.netcore.platforms.2.0.0.nupkg.sha512",

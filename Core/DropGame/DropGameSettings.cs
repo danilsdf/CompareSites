@@ -9,11 +9,9 @@ namespace BackParse.Core.DropGame
         public string BaseUrl { get; set; } = @"https://dropgame.ru/android";
         public string TypeApp { get; set; }
         public string Prefix { get; set; } = @"page/Number";
-        public int MaxPage { get; set; }
-        public DropGameSettings(string typeapp,int max)
+        public DropGameSettings(string typeapp)
         {
             TypeApp = typeapp;
-            MaxPage = max;
         }
     }
 }

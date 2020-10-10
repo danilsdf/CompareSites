@@ -24,7 +24,7 @@ namespace BackParse.Core.DropGame
         {
             List<string> urls = new List<string>();
             string findstr = "Версия";
-            var version = document.QuerySelectorAll("li").Select(s=>s.TextContent).Where(w => w.Contains(findstr)).Select(s=>s.Substring(findstr.Length+6)).FirstOrDefault();
+            var version = document.QuerySelectorAll("li").Select(s=>s.TextContent).Where(w => w.Contains(findstr)).Select(s=>s.Substring(findstr.Length+6)).FirstOrDefault().Replace(" ", "");
             var name = document.QuerySelectorAll("div").Where(w => w.ClassName != null && w.ClassName.Contains("fheader fx-1")).Select(s=>s.TextContent).FirstOrDefault();
 
             return new Tuple<string, string>(name,version);

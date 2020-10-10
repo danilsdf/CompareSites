@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Олег\\source\\repos\\BackParse\\BackParse.csproj": {}
+    "C:\\Users\\Олег\\source\\repos\\BackParse\\CompareSites\\BackParse.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Олег\\source\\repos\\BackParse\\BackParse.csproj": {
+    "C:\\Users\\Олег\\source\\repos\\BackParse\\CompareSites\\BackParse.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Олег\\source\\repos\\BackParse\\BackParse.csproj",
+        "projectUniqueName": "C:\\Users\\Олег\\source\\repos\\BackParse\\CompareSites\\BackParse.csproj",
         "projectName": "BackParse",
-        "projectPath": "C:\\Users\\Олег\\source\\repos\\BackParse\\BackParse.csproj",
+        "projectPath": "C:\\Users\\Олег\\source\\repos\\BackParse\\CompareSites\\BackParse.csproj",
         "packagesPath": "C:\\Users\\Олег\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Олег\\source\\repos\\BackParse\\obj\\",
+        "outputPath": "C:\\Users\\Олег\\source\\repos\\BackParse\\CompareSites\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
