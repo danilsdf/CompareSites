@@ -1,6 +1,9 @@
 ﻿using BackParse.Core;
+using BackParse.Core.APK;
 using BackParse.Core.DropGame;
+using BackParse.Core.FPDA;
 using BackParse.Core.Google;
+using BackParse.Core.GooglePlay;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,10 +19,17 @@ namespace BackParse.TelegramBot.Commands
 
         public override void Execute(Message message, TelegramBotClient client)
         {
-            ParserWorker parser = new ParserWorker(new GoogleParser(), new DropGameParser());
 
-            parser.GParserSetting = new GoogleSettings();
-            parser.DParserSetting = new DropGameSettings("program");
+            ParserWorker parser = new ParserWorker(new GooglePlayParser(), new DropGameParser(), new FPDAParser())
+            {
+                GoogleParser = new GoogleParser(new GoogleSettings()),
+                GParserSetting = new GooglePlaySettings(),
+                FParserSetting = new FPDASettings(),
+                ApkSetting = new ApkSetting(),
+                DParserSetting = new DropGameSettings("program"),
+                ApkParser = new ApkParser(new ApkSetting())
+            };
+
             parser.Start(client, message.Chat.Id);
         }
     }
