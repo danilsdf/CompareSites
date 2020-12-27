@@ -189,7 +189,7 @@ namespace BackParse.Core
 
                 foreach (var url in urls)
                 {
-                    string DropGameVersion = null, DropGameName = null, ApkVersion = "0.0.0";
+                    string DropGameVersion = null, DropGameName = null, ApkVersion = "0";
                     try
                     {
                         source = await GPloader.GetSourceBylink(url);
@@ -202,9 +202,12 @@ namespace BackParse.Core
                             await client.SendTextMessageAsync(chatId, $"Солнце, эту игру нужно посмотреть самостоятельно\n{url}");
                             continue;
                         }
-                        string engname = await GoogleParser.GetEngNameAsync(DropGameName);
-                        SearchResult result = await GoogleParser.GetResultAsync(DropGameVersion);
-
+                        //string engname = await GoogleParser.GetEngNameAsync(DropGameName);
+                        string engname = DropGameName;
+                        SearchResult result = await GoogleParser.GetResultAsync(engname);
+                        source = await GoogleParser.GetResult(engname);
+                        document = await domParser.ParseDocumentAsync(source);
+                        string urlstr = googleparser.GetAppUrl(document,engname);
                         try
                         {
                             string appUrl = await GetUrlApp(DropGameName);
@@ -245,7 +248,7 @@ namespace BackParse.Core
                     GoogleVersion = ChangeVersion(GoogleVersion);
                     ApkVersion = ChangeVersion(ApkVersion);
                     Console.WriteLine(DropGameName);
-                    Console.WriteLine($"{DropGameVersion} {GoogleVersion} {ApkVersion}");
+                    Console.WriteLine($"{DropGameVersion} {GoogleVersion} {ApkVersion} {FpdaVersion}");
                     string Version;
                     if (FpdaVersion == null)
                     {
