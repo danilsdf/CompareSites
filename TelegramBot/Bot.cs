@@ -7,7 +7,7 @@ namespace BackParse.TelegramBot
     public static class Bot
     {
         public static TelegramBotClient client;
-        public static string token = "1128908683:AAHZaBNI35dGL3_FHFSdE-vDAOMDkroiRqI";
+        public static string token = "YourToken";
         public static string Name = "kristinahelper_bot";
 
         private static List<Command> commandslist;
